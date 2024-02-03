@@ -1,14 +1,10 @@
 // Summary.js
-import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
-import { UserContext } from '../App';
+import React from 'react';
+import { useLocation } from 'react-router-dom';
 
 const Summary = () => {
-  const { showId } = useParams();
-  const [shows] = useContext(UserContext);
-
-  // Find the selected show based on showId
-  const selectedShow = shows.find((show) => show.show.id === parseInt(showId, 10));
+  const location = useLocation();
+  const selectedShow = location.state?.show;
 
   return (
     <>
