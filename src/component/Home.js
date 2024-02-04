@@ -1,6 +1,6 @@
 // Home.js
 import React, { useContext, useEffect, useState } from 'react';
-import { Link , useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UserContext } from '../App';
 
 const Home = () => {
@@ -19,12 +19,10 @@ const Home = () => {
   }, [setShows]);
 
   const handleShowSummary = (show) => {
-    // Pass the selected show as state
-    history.push({
-      pathname: '/summary',
-      state: { show },
-    });
+    setSelectedShow(show);
   };
+
+  localStorage.setItem('shows', JSON.stringify(shows));
 
   return (
     <>
@@ -46,7 +44,7 @@ const Home = () => {
               <div className='text-center m-1'>Language: {show.show.language}</div>
 
               <div className='flex justify-center'>
-                <Link to="/summary" target='_blank' onClick={() => handleShowSummary(show)}>
+                <Link to={`/summary/${show.show.id}`} target='_blank' onClick={() => handleShowSummary(show)}>
                   <button
                     className='flex items-center gap-2 px-4 py-2 font-sans text-xs font-bold text-center text-gray-900 uppercase align-middle transition-all rounded-lg select-none disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none hover:bg-gray-900/10 active:bg-gray-900/20'
                     type='button'
